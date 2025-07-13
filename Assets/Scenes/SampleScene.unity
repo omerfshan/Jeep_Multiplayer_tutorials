@@ -1742,7 +1742,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _vehicleRb: {fileID: 9208992160360508960}
   _vehicleBoxCol: {fileID: 9208992160360508961}
-  wheelSetting: {fileID: 0}
+  wheelSetting: {fileID: 11400000, guid: 407b455eaebde438bb8f55d0ff9bba9f, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

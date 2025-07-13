@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.Mathematics;
@@ -37,15 +38,65 @@ public class PlayerVehiclesController : MonoBehaviour
 
     }
     void Update()
-    {
+    {/////
         //steer
         SetSteerSpeed(Input.GetAxis("Horizontal"));
         //accelerate
         SetAccelerateSpeed(Input.GetAxis("Vertical"));
 
     }
-    private void FixedUpdate() {
+    private void FixedUpdate()
+    {
         Suspension();
+        UpdateSteering();
+    }
+    private void UpdateSteering()
+    {
+        foreach (WheelType wheel in _wheels)
+        {
+            if (!isGrounded(wheel))
+            {
+                continue;
+            }
+            Vector3 springPosition = GetSpringPosition(wheel);
+            Vector3 SlideDirection = GetSlideDirection(wheel);
+            float slideVelocity = Vector3.Dot(SlideDirection, _vehicleRb.GetPointVelocity(springPosition));
+            float desiredVelocityChange = GetWheelGripFactor(wheel) * -slideVelocity;
+            float desiredAccelaration = desiredVelocityChange / Time.fixedTime;
+        }
+    }
+
+    private Vector3 GetSlideDirection(WheelType wheel)
+    {
+        Vector3 forward = GetWheelRollDirection(wheel);
+        return Vector3.Cross(transform.up, forward); //sinüs carpımı
+        
+       
+    }
+
+    private Vector3 GetWheelRollDirection(WheelType wheel)
+    {
+        bool frontWheels = wheel == WheelType.FrontLeft || wheel == WheelType.FrontRight;
+        if (frontWheels)
+        {
+            var steerQartetion = Quaternion.AngleAxis(_steerSpeed * wheelSetting.SteerAngle, Vector3.up);
+            return steerQartetion * transform.forward;
+        }
+        else
+        {
+            return transform.forward;
+        }
+    }
+
+    private bool isGrounded(WheelType wheel)
+    {
+        return _springDatas[wheel]._currentLength < wheelSetting.SpringRestLength;
+    }
+    private float GetWheelGripFactor(WheelType wheel)
+    {
+        bool frontWheels = wheel == WheelType.FrontLeft || wheel == WheelType.FrontRight;
+        return frontWheels ? wheelSetting.FrontWheelsGripFactor : wheelSetting.RearWheelsGripFactor;
+
     }
     private void Suspension()
     {
@@ -122,6 +173,7 @@ public class PlayerVehiclesController : MonoBehaviour
         };
     }
 }
+
 public static class Hookes
 {
     public static float CalculateDampedSpringForce(
