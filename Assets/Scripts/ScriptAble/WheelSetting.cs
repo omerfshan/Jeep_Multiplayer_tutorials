@@ -17,7 +17,7 @@ public class WheelSetting : ScriptableObject
 
 
     public float FrontWheelsGripFactor => _frontWheelsGripFactor;
-     public float RearWheelsGripFactor => RearWheelsGripFactor;
+     public float RearWheelsGripFactor => _RearWheelsGripFactor;
     
     public float WheelpaddingX => _wheelpaddingX;
     public float WheelpaddingZ => _wheelpaddingZ;
