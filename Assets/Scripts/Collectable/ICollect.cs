@@ -1,5 +1,5 @@
 public interface ICollect
 {
-       public void Collect(); 
+       public void Collect(PlayerSkillController playerSkillController); 
        public void CollectRpc(); 
 }
