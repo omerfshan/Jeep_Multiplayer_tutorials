@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec4c6a6d186ce4f81b09dd29fbc5258b, type: 3}
   m_Name: ShieldSkillData
   m_EditorClassIdentifier: 
-  _skillPrefabs: {fileID: 0}
+  _skillPrefabs: {fileID: 8684178928672760779, guid: 255f5ea02a72e4df3bcac6fac242a08d, type: 3}

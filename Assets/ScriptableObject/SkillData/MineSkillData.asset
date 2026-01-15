@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec4c6a6d186ce4f81b09dd29fbc5258b, type: 3}
   m_Name: MineSkillData
   m_EditorClassIdentifier: 
-  _skillPrefabs: {fileID: 0}
+  _skillPrefabs: {fileID: 1489403184651557586, guid: dcf0097491538420bb55639ea3907cda, type: 3}
